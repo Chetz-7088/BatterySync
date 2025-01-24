@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import "./authentication.css";
-import {
-  FaEnvelope,
-  FaKey,
-  FaGoogle,
-  FaApple,
-} from "react-icons/fa";
+import { FaEnvelope, FaKey, FaGoogle, FaApple } from "react-icons/fa";
 import { IoIosLogIn } from "react-icons/io";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import InputField from "../ui/InputField";
@@ -16,18 +11,41 @@ import {
   login_validationSchema,
 } from "../../lib/server_actions/utils";
 import {
-  handleAppleLogin,
   handleGoogleLogin,
+  handleAppleLogin,
   login_onSubmit,
   togglePasswordVisibility,
 } from "../../lib/client_actions/user.actions";
+import PageTransitionWrapper from "../../PageTransitionWrapper";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [socialLoginDisabled, setSocialLoginDisabled] = useState(false);
+  console.log(isSubmitting);
+
+  const handleSocialLogin = async (platform, setSubmitting) => {
+    setSocialLoginDisabled(true);
+    setIsSubmitting(true);
+
+    try {
+      if (platform === "google") {
+        await handleGoogleLogin(setSubmitting, navigate);
+      } else if (platform === "apple") {
+        await handleAppleLogin(setSubmitting, navigate); // Implement Apple login logic
+      }
+    } catch (error) {
+      toast.error(error.message || "An error occurred. Please try again.");
+    } finally {
+      setSocialLoginDisabled(false);
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <div>
+    <PageTransitionWrapper>
       <div className="auth-right">
         <div className="glass-form">
           <h2>
@@ -37,25 +55,27 @@ const Login = () => {
           <Formik
             initialValues={login_initialValues}
             validationSchema={login_validationSchema}
-            onSubmit={(values, actions) =>
-              login_onSubmit(values, actions, navigate)
-            }
+            onSubmit={async (values, actions) => {
+              setIsSubmitting(true);
+              await login_onSubmit(values, actions, navigate);
+              setIsSubmitting(false);
+            }}
           >
-            {({ isSubmitting }) => (
+            {({ isSubmitting, isValid, dirty, setSubmitting }) => (
               <Form>
                 {/* Social login buttons */}
                 <div className="social-buttons">
                   <button
                     className="social-button google-button"
-                    onClick={handleGoogleLogin}
-                    disabled={isSubmitting}
+                    onClick={() => handleSocialLogin("google", setSubmitting)}
+                    disabled={isSubmitting || socialLoginDisabled}
                   >
                     <FaGoogle /> <span>Google</span>
                   </button>
                   <button
                     className="social-button apple-button"
-                    onClick={handleAppleLogin}
-                    disabled={isSubmitting}
+                    onClick={() => handleSocialLogin("apple", setSubmitting)}
+                    disabled={isSubmitting || socialLoginDisabled}
                   >
                     <FaApple /> <span>Apple</span>
                   </button>
@@ -66,7 +86,7 @@ const Login = () => {
                   <span>or</span>
                 </div>
 
-                {/* Form */}
+                {/* Form Fields */}
                 {/* Email */}
                 <InputField
                   type="email"
@@ -86,10 +106,13 @@ const Login = () => {
                     togglePasswordVisibility(setPasswordVisible)
                   }
                 />
+
                 <button
                   type="submit"
                   className="submit-button"
-                  disabled={isSubmitting}
+                  disabled={
+                    isSubmitting || !isValid || !dirty || socialLoginDisabled
+                  }
                 >
                   {isSubmitting ? "Logging In..." : "Login"}{" "}
                   <MdOutlineArrowForwardIos />
@@ -97,12 +120,16 @@ const Login = () => {
               </Form>
             )}
           </Formik>
+
+          <p className="signup-link">
+            <Link to="/forgetPassword">Forget Password? Click Here.</Link>
+          </p>
           <p className="signup-link">
             Don't have an account? <Link to="/signup">Register</Link>
           </p>
         </div>
       </div>
-    </div>
+    </PageTransitionWrapper>
   );
 };
 

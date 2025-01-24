@@ -25,11 +25,38 @@ import {
   signup_onSubmit,
   togglePasswordVisibility,
 } from "../../lib/client_actions/user.actions";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [socialLoginDisabled, setSocialLoginDisabled] = useState(false);
+  console.log(isSubmitting);
+
+  const handleSocialLogin = async (platform, setSubmitting) => {
+    setSocialLoginDisabled(true);
+    setIsSubmitting(true);
+
+    try {
+      if (platform === "google") {
+        await handleGoogleLogin(setSubmitting, navigate);
+      } else if (platform === "apple") {
+        await handleAppleLogin(setSubmitting, navigate); // Implement Apple login logic
+      }
+    } catch (error) {
+      toast.error(error.message || "An error occurred. Please try again.");
+    } finally {
+      setSocialLoginDisabled(false);
+      setIsSubmitting(false);
+    }
+  };
+
+  const handlePhoneInput = (e) => {
+    const input = e.target.value;
+    e.target.value = input.replace(/\D/g, "");
+  };
 
   return (
     <div>
@@ -42,25 +69,27 @@ const SignUp = () => {
           <Formik
             initialValues={signup_initialValues}
             validationSchema={signup_validationSchema}
-            onSubmit={(values, actions) =>
-              signup_onSubmit(values, actions, navigate)
-            }
+            onSubmit={async (values, actions) => {
+              setIsSubmitting(true);
+              await signup_onSubmit(values, actions, navigate);
+              setIsSubmitting(false);
+            }}
           >
-            {({ isSubmitting }) => (
+            {({ isSubmitting, isValid, dirty, setSubmitting }) => (
               <Form>
                 {/* Social login buttons */}
                 <div className="social-buttons">
                   <button
                     className="social-button google-button"
-                    onClick={handleGoogleLogin}
-                    disabled={isSubmitting}
+                    onClick={() => handleSocialLogin("google", setSubmitting)}
+                    disabled={isSubmitting || socialLoginDisabled}
                   >
                     <FaGoogle /> <span>Google</span>
                   </button>
                   <button
                     className="social-button apple-button"
-                    onClick={handleAppleLogin}
-                    disabled={isSubmitting}
+                    onClick={() => handleSocialLogin("apple", setSubmitting)}
+                    disabled={isSubmitting || socialLoginDisabled}
                   >
                     <FaApple /> <span>Apple</span>
                   </button>
@@ -165,18 +194,20 @@ const SignUp = () => {
 
                   {/* Phone */}
                   <InputField
-                    type="numeric"
+                    type="text"
                     name="phone"
                     placeholder="Phone"
                     icon={<FaPhone />}
+                    onInput={handlePhoneInput}
                   />
 
                   {/* Password */}
                   <InputField
-                    type={passwordVisible ? "text" : "password"}
+                    type="password"
                     name="password"
                     placeholder="Password"
                     icon={<FaKey />}
+                    passwordVisible={passwordVisible}
                     togglePasswordVisibility={() =>
                       togglePasswordVisibility(setPasswordVisible)
                     }
@@ -184,10 +215,11 @@ const SignUp = () => {
 
                   {/* Confirm Password */}
                   <InputField
-                    type={confirmPasswordVisible ? "text" : "password"}
+                    type="password"
                     name="confirmPassword"
                     placeholder="Confirm Password"
                     icon={<FaKey />}
+                    passwordVisible={confirmPasswordVisible}
                     togglePasswordVisibility={() =>
                       togglePasswordVisibility(setConfirmPasswordVisible)
                     }

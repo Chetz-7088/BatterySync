@@ -1,7 +1,6 @@
-// src/components/InputField.js
-import React from 'react';
-import { Field, ErrorMessage } from 'formik';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import React from "react";
+import { Field, ErrorMessage } from "formik";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const InputField = ({
     type,
@@ -9,7 +8,8 @@ const InputField = ({
     placeholder,
     icon,
     passwordVisible = false,
-    togglePasswordVisibility = (() => { })
+    togglePasswordVisibility = () => { },
+    onInput,
 }) => {
     return (
         <div className="input-field-container">
@@ -17,13 +17,14 @@ const InputField = ({
             <div className="input-container">
                 {icon && <div className="input-icon left">{icon}</div>}
                 <Field
-                    type={passwordVisible && type === 'password' ? 'text' : type}
+                    type={passwordVisible && type === "password" ? "text" : type}
                     id={name}
                     name={name}
                     placeholder={`Enter your ${placeholder.toLowerCase()}`}
                     className="input-field"
+                    onInput={onInput}
                 />
-                {type === 'password' && (
+                {type === "password" && (
                     <div
                         className="input-icon right password-visibility"
                         onClick={togglePasswordVisibility}

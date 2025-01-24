@@ -1,8 +1,12 @@
-import React from 'react';
+import React from "react";
 import "./authentication.css";
-import logo from '../../assets/BatterySync.png';
-import { Link } from 'react-router-dom';
-import { FaBatteryHalf, FaRegCheckCircle, FaMapMarkedAlt } from 'react-icons/fa';
+import logo from "../../assets/BatterySync.png";
+import { Link } from "react-router-dom";
+import {
+    FaBatteryHalf,
+    FaRegCheckCircle,
+    FaMapMarkedAlt,
+} from "react-icons/fa";
 
 const LeftSection = ({ isSignup }) => {
     return (
@@ -19,7 +23,9 @@ const LeftSection = ({ isSignup }) => {
             </h2>
 
             <div className="text-lg mb-1.5">
-                <p style={{ color: '#49879c' }}>{isSignup ? 'Get started now' : 'Join back to your previous journey'}</p>
+                <p style={{ color: "#49879c" }}>
+                    {isSignup ? "Get started now" : "Join back to your previous journey"}
+                </p>
             </div>
             <div className="ev-features text-white mb-1.5">
                 {/* <h3 className="text-xl">Manage your EV battery health with exciting features like:</h3> */}
@@ -27,17 +33,25 @@ const LeftSection = ({ isSignup }) => {
                     <li className="flex flex-col items-center">
                         <FaBatteryHalf className="react-icon" color="#295d78" />
                         <div className="feature-title">Battery Performance Tracking</div>
-                        <div className="feature-description">Track and monitor the health of your EV battery in real-time.</div>
+                        <div className="feature-description">
+                            Track and monitor the health of your EV battery in real-time.
+                        </div>
                     </li>
                     <li className="flex flex-col items-center">
                         <FaRegCheckCircle className="react-icon" color="#295d78" />
                         <div className="feature-title">Health Diagnostics & Alerts</div>
-                        <div className="feature-description">Receive instant alerts and diagnostic reports on battery health.</div>
+                        <div className="feature-description">
+                            Receive instant alerts and diagnostic reports on battery health.
+                        </div>
                     </li>
                     <li className="flex flex-col items-center">
                         <FaMapMarkedAlt className="react-icon" color="#295d78" />
-                        <div className="feature-title">Trip Planner & Charging Station Finder</div>
-                        <div className="feature-description">Find nearby charging stations and plan your trips accordingly.</div>
+                        <div className="feature-title">
+                            Trip Planner & Charging Station Finder
+                        </div>
+                        <div className="feature-description">
+                            Find nearby charging stations and plan your trips accordingly.
+                        </div>
                     </li>
                 </ul>
             </div>
