@@ -122,7 +122,7 @@ const Login = () => {
           </Formik>
 
           <p className="signup-link">
-            <Link to="/forgetPassword">Forget Password? Click Here.</Link>
+            Forgot Password? <Link to="/forgetPassword">Click Here.</Link>
           </p>
           <p className="signup-link">
             Don't have an account? <Link to="/signup">Register</Link>

@@ -6,13 +6,14 @@ import AuthPage from "./components/Authentication/AuthPage";
 import ForgetPassword from "./components/Authentication/ForgetPass";
 import VerifyOtp from "./components/Authentication/Verify_Otp";
 import UpdatePass from "./components/Authentication/UpdatePass";
+import Home from "./components/Authentication/Home";
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Home Page */}
-        <Route path="/" element={<h1>Home Page</h1>} />
+        <Route path="/" element={<Home />} />
 
         {/* Authentication Page */}
         <Route path="/login" element={<AuthPage isSignup={false} />} />
