@@ -6,7 +6,7 @@ import AuthPage from "./components/Authentication/AuthPage";
 import ForgetPassword from "./components/Authentication/ForgetPass";
 import VerifyOtp from "./components/Authentication/Verify_Otp";
 import UpdatePass from "./components/Authentication/UpdatePass";
-import Home from "./components/Authentication/Home";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
