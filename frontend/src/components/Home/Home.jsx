@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaCarBattery, FaMapMarkedAlt, FaTools } from 'react-icons/fa';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
-import logo from '../../assets/BatterySync.png';
 import PageTransitionWrapper from '../../PageTransitionWrapper';
+import Navbar from './Navbar';
+import Hero from './Hero';
 import './home.css';
 
 const Home = () => {
@@ -11,52 +12,10 @@ const Home = () => {
     <PageTransitionWrapper>
         <div className="home">
             {/* Header */}
-            <header className="navbar">
-                <div className="logo-container flex justify-start items-center mb-1.5">
-                    <Link className="logo flex items-center text-white" to="/">
-                        <img src={logo} alt="Company Logo" className="w-24 h-24 mr-4" />
-                        <h1 className="text-4xl font-semibold">BatterySync</h1>
-                    </Link>
-                </div>
-                <nav className='navigation'>
-                    <ul>
-                        <li className='list active'>
-                            <Link to="/">
-                                <span className='icon'><ion-icon name="home" /></span>
-                                <span className='text'>Home</span>
-                            </Link>
-                        </li>
-                        <li className='list'>
-                            <Link to="/plans">
-                                <span className='icon'><ion-icon name="pricetag" /></span>
-                                <span className='text'>Explore Plans</span>
-                            </Link>
-                        </li>
-                        <li className='list'>
-                            <Link to="/signup">
-                                <span className='icon'><ion-icon name="arrow-up-circle-sharp" /></span>
-                                <span className='text'>Sign Up</span>
-                            </Link>
-                        </li>
-                        <li className='list'>
-                            <Link to="/login">
-                                <span className='icon'><ion-icon name="log-in" /></span>
-                                <span className='text'>Login</span>
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
+            <Navbar />
 
             {/* Hero Section */}
-            <section className="hero">
-                <h1>Take Control of Your EV Battery Health & Performance</h1>
-                <p>Monitor battery health, optimize energy usage, and extend your EV’s lifespan.</p>
-                <div className="hero-buttons">
-                <button>Get Started</button>
-                <button>Learn More</button>
-                </div>
-            </section>
+            <Hero />
 
             {/* Features Section */}
             <section className="features">
@@ -92,7 +51,7 @@ const Home = () => {
             </section>
 
             {/* How It Works Section */}
-            <section className="how-it-works">
+            <section id="how-it-works" className="how-it-works">
                 <h2>How It Works</h2>
                 <div className="steps">
                     <div className="step">
