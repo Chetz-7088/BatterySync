@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaCarBattery, FaMapMarkedAlt, FaTools } from 'react-icons/fa';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
 import PageTransitionWrapper from '../../PageTransitionWrapper';
 import Navbar from './Navbar';
 import Hero from './Hero';
+import Features from './Features';
 import './home.css';
 
 const Home = () => {
@@ -18,26 +18,7 @@ const Home = () => {
             <Hero />
 
             {/* Features Section */}
-            <section className="features">
-                <h2>Core Features</h2>
-                <div className="feature-cards">
-                    <div className="feature-card">
-                        <FaCarBattery size={50} />
-                        <h3>Battery Health Monitoring</h3>
-                        <p>Monitor your battery’s health in real time to ensure optimal performance.</p>
-                    </div>
-                    <div className="feature-card">
-                        <FaTools size={50} />
-                        <h3>Predictive Maintenance</h3>
-                        <p>Receive alerts for potential issues and prevent unexpected breakdowns.</p>
-                    </div>
-                    <div className="feature-card">
-                        <FaMapMarkedAlt size={50} />
-                        <h3>Charging Station Locator</h3>
-                        <p>Find the best charging stations on your route with ease.</p>
-                    </div>
-                </div>
-            </section>
+            <Features />
 
             {/* Benefits Section */}
             <section className="benefits">
