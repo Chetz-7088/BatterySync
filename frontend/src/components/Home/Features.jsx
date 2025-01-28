@@ -4,7 +4,7 @@ import { FaBatteryHalf, FaMapMarkedAlt, FaTools } from 'react-icons/fa';
 const Features = () => {
     return (
         <section className="features">
-            <h2>Core Features</h2>
+            <h2>CORE FEATURES</h2>
             <div className="feature-cards">
                 <div className="feature-card">
                     <div className="card-front">
