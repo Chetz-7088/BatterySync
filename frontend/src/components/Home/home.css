@@ -223,77 +223,105 @@
     animation: fadeIn 1.5s ease-in-out;
 }
 
-.features-heading {
+.features h2 {
     font-size: 2.5rem;
-    font-weight: bold;
     margin-bottom: 2rem;
     color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-family: 'Playfair Display', serif;
 }
 
 .feature-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     justify-items: center;
 }
 
 .feature-card {
-    background: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 300px;
+    perspective: 1000px;
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 300px;
     border-radius: 1rem;
-    padding: 2rem;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.8s ease;
 }
 
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.icon-circle {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #00ffcc, #0066ff);
-    border-radius: 50%;
+.card-front {
+    background: linear-gradient(135deg, #001f3f, #003d7a);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 1.5rem auto;
-    animation: bounceIn 1s ease-in-out;
-    box-shadow: 0 5px 15px rgba(0, 102, 255, 0.5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-.icon-circle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(0, 102, 255);
+.icon-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00ffcc, #0066ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: pulseCards 1.5s infinite;
 }
 
-h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+.icon-container svg {
+    color: #fff;
+    font-size: 3rem;
+}
+
+.card-back {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
     color: #ffffff;
+    padding: 1.5rem;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid #1f2937;
+    text-align: center;
+    position: relative;
 }
 
-p {
+
+.card-back h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #00ffcc;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0, 255, 204, 0.5);
+    font-family: 'Playfair Display', serif;
+}
+
+.card-back p {
     font-size: 1rem;
-    line-height: 1.6;
-    color: #d1d1d1;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    font-family: 'Roboto', sans-serif;
 }
 
-@keyframes bounceIn {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
+.feature-card:hover .card-front {
+    transform: rotateY(180deg);
+}
+
+.feature-card:hover .card-back {
+    transform: rotateY(0deg);
+}
+
+@keyframes pulseCards {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 255, 204, 0.8), 0 0 20px rgba(0, 102, 255, 0.8);
     }
     50% {
-        transform: scale(1.1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
+        box-shadow: 0 0 20px rgba(0, 255, 204, 1), 0 0 40px rgba(0, 102, 255, 1);
     }
 }

@@ -1,37 +1,43 @@
 import React from "react";
-import { FaBatteryHalf, FaMapMarkedAlt, FaTools } from "react-icons/fa";
+import { FaBatteryHalf, FaMapMarkedAlt, FaTools } from 'react-icons/fa';
 
 const Features = () => {
     return (
         <section className="features">
-            <h2 className="features-heading">Core Features</h2>
+            <h2>Core Features</h2>
             <div className="feature-cards">
                 <div className="feature-card">
-                    <div className="icon-circle">
-                        <FaBatteryHalf size={40} />
+                    <div className="card-front">
+                        <div className="icon-container">
+                            <FaBatteryHalf size={50} />
+                        </div>
                     </div>
-                    <h3>Battery Performance Tracking</h3>
-                    <p>
-                        Keep track of your battery’s health with real-time metrics and detailed analysis, ensuring it delivers peak performance at all times.
-                    </p>
+                    <div className="card-back">
+                        <h3>Battery Performance Tracking</h3>
+                        <p>Keep your EV battery in peak condition by monitoring its health in real-time. Gain actionable insights to ensure maximum performance and longevity.</p>
+                    </div>
                 </div>
                 <div className="feature-card">
-                    <div className="icon-circle">
-                        <FaTools size={40} />
+                    <div className="card-front">
+                        <div className="icon-container">
+                            <FaTools size={50} />
+                        </div>
                     </div>
-                    <h3>Predictive Maintenance</h3>
-                    <p>
-                        Stay ahead of potential issues with proactive maintenance alerts, reducing unexpected breakdowns and repair costs.
-                    </p>
+                    <div className="card-back">
+                        <h3>Predictive Maintenance</h3>
+                        <p>Stay ahead of potential issues with early alerts for maintenance. Avoid costly repairs and extend the life of your EV battery seamlessly.</p>
+                    </div>
                 </div>
                 <div className="feature-card">
-                    <div className="icon-circle">
-                        <FaMapMarkedAlt size={40} />
+                    <div className="card-front">
+                        <div className="icon-container">
+                            <FaMapMarkedAlt size={50} />
+                        </div>
                     </div>
-                    <h3>Trip Planner & Charging Station Locator</h3>
-                    <p>
-                        Plan your trips with ease by locating nearby charging stations and optimizing your route for seamless travel.
-                    </p>
+                    <div className="card-back">
+                        <h3>Trip Planner & Charging Station Locator</h3>
+                        <p>Effortlessly find charging stations on your route. Plan trips more effectively, ensuring you always stay charged and ready for your journey.</p>
+                    </div>
                 </div>
             </div>
         </section>
