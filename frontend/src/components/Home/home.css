@@ -220,7 +220,14 @@
     padding: 2rem;
     color: white;
     text-align: center;
-    animation: fadeIn 1.5s ease-in-out;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+.features.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .features h2 {
