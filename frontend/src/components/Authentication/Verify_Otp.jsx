@@ -1,32 +1,70 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FaFingerprint } from "react-icons/fa";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import "./authentication.css";
 import { otp_initialValues, otpSchema } from "../../lib/server_actions/utils";
-import { otp_handleSubmit } from "../../lib/client_actions/user.actions";
+import { getRemainingTimeToResend, otp_handleSubmit, resendOtp } from "../../lib/client_actions/user.actions";
 import PageTransitionWrapper from "../../PageTransitionWrapper";
 import Countdown from "react-countdown";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const VerifyOtp = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const purpose = location.state?.purpose; // 'emailVerification' or 'forgotPassword'
+
+  const [remainingTime, setRemainingTime] = useState(getRemainingTimeToResend());
+  const [isResendAllowed, setIsResendAllowed] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const remaining = getRemainingTimeToResend();
+      setRemainingTime(remaining);
+
+      if (remaining === 0) {
+        setIsResendAllowed(true);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleResendOtp = async () => {
+    try {
+      const email = localStorage.getItem("email");
+      if (!email) {
+        navigate("/forgetPass");
+        throw new Error("Authentication timeout. Please re-enter email id");
+      }
+      await resendOtp(email);
+      setIsResendAllowed(false);
+      setRemainingTime(getRemainingTimeToResend()); // Reset timer state
+    } catch (error) {
+      toast.dismiss();
+      toast.error(error.message);
+    }
+  };
+
   return (
     <PageTransitionWrapper>
       <div className="auth-center">
         <div className="glass-form">
           <h2>
-            <FaFingerprint className="login-icon" /> Verify OTP
+            <FaFingerprint className="login-icon" />{" "}
+            {purpose === "forgotPassword" ? "Reset Password" : "Verify Email ID"}
           </h2>
           <p style={{ color: "#b9b9b9", marginTop: "-10px" }}>
-            Enter the 6-digit OTP sent to your email.
+            {purpose === "forgotPassword"
+              ? "Enter the 6-digit OTP sent to your email to reset your password."
+              : "Enter the 6-digit OTP sent to your email for verification."}
           </p>
 
           <Formik
             initialValues={otp_initialValues}
             validationSchema={otpSchema}
-            onSubmit={(values, actions) =>
-              otp_handleSubmit(values, actions, navigate)
-            }
+            onSubmit={(values, actions) => otp_handleSubmit(values, actions, navigate, purpose)}
           >
             {({ values, isSubmitting, setFieldValue, isValid, dirty }) => (
               <Form>
@@ -36,12 +74,10 @@ const VerifyOtp = () => {
                       key={index}
                       name={`otp[${index}]`}
                       validate={(value) =>
-                        /^[0-9]$/.test(value) || value === ""
-                          ? undefined
-                          : "Must be a digit"
+                        /^[0-9]$/.test(value) || value === "" ? undefined : "Must be a digit"
                       }
                     >
-                      {({ field, form }) => (
+                      {({ field }) => (
                         <input
                           {...field}
                           type="text"
@@ -53,10 +89,7 @@ const VerifyOtp = () => {
                             if (/^[0-9]$/.test(value) || value === "") {
                               setFieldValue(`otp[${index}]`, value);
                               if (value && index < 5) {
-                                // Move focus to next input
-                                document
-                                  .getElementById(`otp-${index + 1}`)
-                                  .focus();
+                                document.getElementById(`otp-${index + 1}`).focus();
                               }
                             }
                           }}
@@ -66,10 +99,7 @@ const VerifyOtp = () => {
                               !values.otp[index] &&
                               index > 0
                             ) {
-                              // Move focus to previous input
-                              document
-                                .getElementById(`otp-${index - 1}`)
-                                .focus();
+                              document.getElementById(`otp-${index - 1}`).focus();
                             }
                           }}
                           id={`otp-${index}`}
@@ -78,21 +108,29 @@ const VerifyOtp = () => {
                     </Field>
                   ))}
                 </div>
-                <ErrorMessage
-                  name="otp"
-                  component="div"
-                  className="error-message"
-                />
+                <ErrorMessage name="otp" component="div" className="error-message" />
 
-                <Countdown
-                  date={Date.now() + 1 * 60 * 1000} // 1 minute from now
-                  renderer={({ minutes, seconds }) => (
-                    <div className="otp-countdown">
-                      {String(minutes).padStart(2, "0")}:
-                      {String(seconds).padStart(2, "0")}
-                    </div>
-                  )}
-                />
+                {remainingTime > 0 ? (
+                  <Countdown
+                    date={Date.now() + remainingTime}
+                    renderer={({ minutes, seconds }) => (
+                      <div className="otp-countdown">
+                        {String(minutes).padStart(2, "0")}:
+                        {String(seconds).padStart(2, "0")}
+                      </div>
+                    )}
+                  />
+                ) : (
+                  isResendAllowed && (
+                    <button
+                      type="button"
+                      className="resend-button"
+                      onClick={handleResendOtp}
+                    >
+                      Resend OTP
+                    </button>
+                  )
+                )}
 
                 <button
                   type="submit"
@@ -110,9 +148,9 @@ const VerifyOtp = () => {
               </Form>
             )}
           </Formik>
+
           <p className="signup-link">
-            Incorrect Email ID?{" "}
-            <Link to="/forgetPassword">Re-enter email id</Link>
+            Incorrect Email ID? <Link to="/forgetPass">Re-enter email id</Link>
           </p>
         </div>
       </div>

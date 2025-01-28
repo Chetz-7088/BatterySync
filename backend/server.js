@@ -1,45 +1,31 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
-const PORT = process.env.PORT || 5000;
-const mongoose = require('mongoose');
+const userRoutes = require('./routes/user');
+const getConnection = require('./utils/getConnection');
+
+// .env files
 require('dotenv').config();
+const PORT = process.env.PORT || 5000;
 
-
-// Middleware
+// defining app
+const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use('/user', userRoutes);
 
-// Basic Route
-app.get('/', (req, res) => {
-    res.send('Welcome to BatterySync Backend!');
+// Error handling middleware
+app.use((error, req, res, next) => {
+    const message = error.message || "Server Error";
+    const statusCode = error.statusCode || 500;
+    console.error(error.stack || error);
+    res.status(statusCode).json({ message: message });
 });
 
-// Start the server
+// connecting to mongoDB
+getConnection();
+
+// Start the server using Express
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
-
-
-// MongoDB
-const mongoURI = process.env.MONGO_URI;
-
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB Atlas'))
-    .catch((err) => console.log('MongoDB connection error:', err));
-
-// PostgreSQL 
-
-const { Client } = require('pg');
-
-const client = new Client({
-    user: 'your-username',
-    host: 'localhost',
-    database: 'batterysync',
-    password: 'your-password',
-    port: 5432,
-});
-
-client.connect()
-    .then(() => console.log('Connected to PostgreSQL'))
-    .catch((err) => console.error('PostgreSQL connection error:', err));

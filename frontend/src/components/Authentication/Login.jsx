@@ -37,6 +37,7 @@ const Login = () => {
         await handleAppleLogin(setSubmitting, navigate); // Implement Apple login logic
       }
     } catch (error) {
+      toast.dismiss();
       toast.error(error.message || "An error occurred. Please try again.");
     } finally {
       setSocialLoginDisabled(false);
@@ -122,7 +123,7 @@ const Login = () => {
           </Formik>
 
           <p className="signup-link">
-            <Link to="/forgetPassword">Forget Password? Click Here.</Link>
+            <Link to="/forgetPass">Forget Password? Click Here.</Link>
           </p>
           <p className="signup-link">
             Don't have an account? <Link to="/signup">Register</Link>

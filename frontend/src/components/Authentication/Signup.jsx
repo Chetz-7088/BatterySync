@@ -46,6 +46,7 @@ const SignUp = () => {
         await handleAppleLogin(setSubmitting, navigate); // Implement Apple login logic
       }
     } catch (error) {
+      toast.dismiss();
       toast.error(error.message || "An error occurred. Please try again.");
     } finally {
       setSocialLoginDisabled(false);
