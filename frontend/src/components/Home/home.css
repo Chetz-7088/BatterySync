@@ -115,6 +115,7 @@
     padding: 2rem;
     color: white;
     min-height: 70vh;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 .hero-content {
@@ -126,7 +127,6 @@
     flex-wrap: wrap;
     flex: 1;
     text-align: left;
-    animation: fadeIn 1.5s ease-in-out;
 }
 
 .hero-heading {
