@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { MdOutlineEvStation, MdBatteryChargingFull, MdNotificationsActive } from "react-icons/md";
 
 const Working = () => {
+    const [isVisible, setIsVisible] = useState(false);
+    const workingRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (workingRef.current) {
+            observer.observe(workingRef.current);
+        }
+
+        return () => {
+            if (workingRef.current) {
+                observer.unobserve(workingRef.current);
+            }
+        };
+    }, []);
+
     return (
-        <section id="how-it-works" className="how-it-works">
+        <section id="how-it-works" className={`how-it-works ${isVisible ? "visible" : ""}`} ref={workingRef}>
             <h2>How It Works</h2>
             <div className="timeline">
                 <div className="timeline-item">

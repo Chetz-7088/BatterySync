@@ -9,6 +9,13 @@ const Navbar = () => {
         setActiveItem(item);
     }
 
+    const scrollTo = () => {
+        const section = document.getElementById("hero");
+        if(section) {
+            section.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
         <header className="navbar">
             <div className="logo-container flex justify-start items-center mb-1.5">
@@ -25,14 +32,14 @@ const Navbar = () => {
                     >
                         <Link to="/">
                             <span className='icon'><ion-icon name="home" /></span>
-                            <span className='text'>Home</span>
+                            <span className='text' onClick={scrollTo}>Home</span>
                         </Link>
                     </li>
                     <li
                         className={`list ${activeItem === "plans" ? "active" : ""}`}
                         onClick={() => handleNavClick("plans")}
                     >
-                        <Link to="/plans">
+                        <Link to="/">
                             <span className='icon'><ion-icon name="pricetag" /></span>
                             <span className='text'>Explore Plans</span>
                         </Link>

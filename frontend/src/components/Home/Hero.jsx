@@ -10,7 +10,7 @@ const Hero = () => {
     };
 
     return (
-        <section className="hero">
+        <section id="hero" className="hero">
             <div className="hero-content">
                 <h1 className="hero-heading">
                     Take Control of Your <span className="highlight">EV Battery Health</span>
