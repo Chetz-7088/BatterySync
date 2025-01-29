@@ -12,7 +12,7 @@ const Features = () => {
                     setIsVisible(true);
                 }
             },
-            { threshold: 0.2 }
+            { threshold: 0.3 }
         );
         if(featuresRef.current){
             observer.observe(featuresRef.current);
@@ -25,7 +25,7 @@ const Features = () => {
     }, []);
 
     return (
-        <section className={`features ${isVisible ? "visible" : ""}`} ref={featuresRef}>
+        <section className={`Features ${isVisible ? "visible" : ""}`} ref={featuresRef}>
             <h2>CORE FEATURES</h2>
             <div className="feature-cards">
                 <div className="feature-card">

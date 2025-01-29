@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AiOutlineCheckCircle } from 'react-icons/ai';
 import PageTransitionWrapper from '../../PageTransitionWrapper';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import Features from './Features';
+import Benefits from './Benefits';
+import Working from './Working';
 import './home.css';
 
 const Home = () => {
@@ -20,38 +21,11 @@ const Home = () => {
             {/* Features Section */}
             <Features />
 
-            {/* Benefits Section */}
-            <section className="benefits">
-                <h2>Benefits</h2>
-                <ul>
-                    <li><AiOutlineCheckCircle /> Extended Battery Life</li>
-                    <li><AiOutlineCheckCircle /> Optimized Charging</li>
-                    <li><AiOutlineCheckCircle /> Predictive Alerts</li>
-                    <li><AiOutlineCheckCircle /> Energy Efficiency</li>
-                </ul>
-            </section>
-
             {/* How It Works Section */}
-            <section id="how-it-works" className="how-it-works">
-                <h2>How It Works</h2>
-                <div className="steps">
-                    <div className="step">
-                        <AiOutlineCheckCircle size={40} />
-                        <h3>Step 1: Connect Your EV</h3>
-                        <p>Simply connect your EV to start monitoring.</p>
-                    </div>
-                    <div className="step">
-                        <AiOutlineCheckCircle size={40} />
-                        <h3>Step 2: Monitor Your Battery Health</h3>
-                        <p>Keep an eye on your battery’s health metrics.</p>
-                    </div>
-                    <div className="step">
-                        <AiOutlineCheckCircle size={40} />
-                        <h3>Step 3: Receive Alerts & Optimize Usage</h3>
-                        <p>Get maintenance alerts and optimize energy use.</p>
-                    </div>
-                </div>
-            </section>
+            <Working />
+
+            {/* Benefits Section */}
+            <Benefits />
 
             {/* Pricing Section */}
             <section className="pricing">

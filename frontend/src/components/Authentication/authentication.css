@@ -22,6 +22,10 @@
     width: 50vw;
 }
 
+.features {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
 .logo-container {
     display: flex;
     justify-content: flex-start;
