@@ -23,7 +23,7 @@ const ForgetPass = () => {
           <h2>
             <IoIosLogIn className="login-icon" /> Forget Password?
           </h2>
-          <p style={{ color: "#b9b9b9", "margin-top": "-10px" }}>
+          <p style={{ color: "#b9b9b9", "marginTop": "-10px" }}>
             Enter your registered email id where you will receive a 6 digit OTP.
           </p>
 

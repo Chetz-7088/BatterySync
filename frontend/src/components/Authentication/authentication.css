@@ -341,6 +341,16 @@ input[type="password"] {
     box-shadow: 0 0 4px #6366f1;
 }
 
+.resend-button {
+    background: none;
+    border: none;
+    color: #4ea4fe;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font-size:16px;
+}
+
 @media (max-width: 1000px) {
     .auth-left {
         display: none;
