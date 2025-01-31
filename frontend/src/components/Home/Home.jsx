@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import PageTransitionWrapper from '../../PageTransitionWrapper';
 import Navbar from './Navbar';
 import Hero from './Hero';
