@@ -1,8 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import phone from '../../assets/home_page.png';
-import { IoBatteryCharging } from "react-icons/io5";
-import { FaChargingStation, FaMapMarkedAlt } from "react-icons/fa";
 
 const Hero = () => {
     const scrollTo = () => {
@@ -32,19 +29,6 @@ const Hero = () => {
                     </button>
                 </div>
             </div>
-
-            <div className="right-half">
-                <div className="revolving-circle">
-                    <div className="rotating-images">
-                        <IoBatteryCharging className="rotating-image image1" />
-                        <FaMapMarkedAlt className="rotating-image image2" />
-                        <FaChargingStation className="rotating-image image3" />
-                    </div>
-                    <div className="center-circle"></div>
-                    <img src={phone} alt="Phone" className="phone-image" />
-                </div>
-            </div>
-
         </section>
     );
 };

@@ -65,12 +65,12 @@
 .ev-features li .feature-title {
     font-size: 1.25rem;
     font-weight: 500;
-    color: white;
+    color: #ffffff;
 }
 
 .ev-features li .feature-description {
     font-size: 0.875rem;
-    color: #b0c4de;
+    color: #e6e6e6;
 }
 
 .ev-features li .react-icon {
@@ -89,7 +89,7 @@
 }
 
 .glass-form {
-    background: rgba(255, 255, 255, 0.2);
+    background: #8e8e8e2e;
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 1rem;
@@ -126,7 +126,7 @@
     border-radius: 50px;
     cursor: pointer;
     width: 10rem;
-    background-color: rgba(78, 94, 149, 0.573);
+    background-color: #4d7a4e;
     color: white;
 }
 
@@ -228,7 +228,7 @@ input[type="password"] {
 .submit-button {
     width: 100%;
     padding: 0.75rem;
-    background-color: #0033b3;
+    background-color: #00a506;
     color: white;
     border: none;
     border-radius: 30px;
@@ -243,15 +243,15 @@ input[type="password"] {
 }
 
 .submit-button:hover {
-    background-color: #00087d;
+    background-color: #00c007;
 }
 
 .submit-button:active {
-    background-color: #0033b3;
+    background-color: #00a506;
 }
 
 .submit-button:disabled {
-    background-color: #564f8b;
+    background-color: #4d7a4e;
 }
 
 .signup-link {
@@ -261,7 +261,7 @@ input[type="password"] {
 }
 
 .signup-link a {
-    color: #4fefef;
+    color: #00ff08;
     text-decoration: none;
 }
 
@@ -348,7 +348,7 @@ input[type="password"] {
     text-decoration: underline;
     cursor: pointer;
     padding: 0;
-    font-size:16px;
+    font-size: 16px;
 }
 
 @media (max-width: 1000px) {

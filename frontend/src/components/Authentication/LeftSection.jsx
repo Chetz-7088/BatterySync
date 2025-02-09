@@ -13,8 +13,10 @@ const LeftSection = ({ isSignup }) => {
         <div className="left-section flex flex-col justify-center items-center">
             <div className="logo-container flex justify-start items-center mb-1.5">
                 <Link className="logo flex items-center text-white" to="/">
-                    <img src={logo} alt="Company Logo" className="w-24 h-24 mr-4" />
-                    <h1 className="text-4xl font-semibold">BatterySync</h1>
+                    <img src={logo} alt="Company Logo" className="w-56 h-56 mr-4" />
+                    <p style={{ fontSize: "32px" }}>
+                        <strong>Battery</strong><span className="lugrasimo-regular">Sync</span>
+                    </p>
                 </Link>
             </div>
 
@@ -23,7 +25,7 @@ const LeftSection = ({ isSignup }) => {
             </h2>
 
             <div className="text-lg mb-1.5">
-                <p style={{ color: "#49879c" }}>
+                <p style={{ color: "#9aff9d" }}>
                     {isSignup ? "Get started now" : "Join back to your previous journey"}
                 </p>
             </div>
@@ -31,21 +33,21 @@ const LeftSection = ({ isSignup }) => {
                 {/* <h3 className="text-xl">Manage your EV battery health with exciting features like:</h3> */}
                 <ul className="features list-none mt-1 space-y-0.75">
                     <li className="flex flex-col items-center">
-                        <FaBatteryHalf className="react-icon" color="#295d78" />
+                        <FaBatteryHalf className="react-icon" color="#9aff9d" />
                         <div className="feature-title">Battery Performance Tracking</div>
                         <div className="feature-description">
                             Track and monitor the health of your EV battery in real-time.
                         </div>
                     </li>
                     <li className="flex flex-col items-center">
-                        <FaRegCheckCircle className="react-icon" color="#295d78" />
+                        <FaRegCheckCircle className="react-icon" color="#9aff9d" />
                         <div className="feature-title">Health Diagnostics & Alerts</div>
                         <div className="feature-description">
                             Receive instant alerts and diagnostic reports on battery health.
                         </div>
                     </li>
                     <li className="flex flex-col items-center">
-                        <FaMapMarkedAlt className="react-icon" color="#295d78" />
+                        <FaMapMarkedAlt className="react-icon" color="#9aff9d" />
                         <div className="feature-title">
                             Trip Planner & Charging Station Finder
                         </div>
