@@ -1,9 +1,9 @@
-const User = require('../models/Users');
+const User = require('../../models/Users');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const joi = require("joi");
 require('dotenv').config();
-const sendMail = require('../utils/sendMail');
+const sendMail = require('../../utils/sendMail');
 const otpExpiryTime = 10 * 60 * 1000;
 
 const forgetPass = async (req, res, next) => {

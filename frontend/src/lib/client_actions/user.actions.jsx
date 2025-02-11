@@ -343,3 +343,62 @@ export const UpdatePass_Handler = async (values, { setSubmitting }, navigate) =>
         setSubmitting(false);
     }
 };
+
+export const PredictRulSubmitHandler = async (values, { setSubmitting }, setRUL) => {
+    setSubmitting(true);
+    toast.dismiss();
+    toast.info("Predicting...");
+
+    try {
+        const {
+            dischargeTime,
+            decrement,
+            maxVoltageDischarge,
+            minVoltageCharge,
+            timeAt4_15v,
+            timeConstantCurrent,
+            chargingTime
+        } = values;
+
+        const user = JSON.parse(localStorage.getItem('user'));
+        const email = user?.email;
+        const data = {
+            dischargeTime,
+            decrement,
+            maxVoltageDischarge,
+            minVoltageCharge,
+            timeAt4_15v,
+            timeConstantCurrent,
+            chargingTime,
+            email
+        };
+
+        const response = await fetch(apis().lithiumIon, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem("user", JSON.stringify(user));
+            setRUL(result.batteryData.rul);
+
+            toast.dismiss();
+            toast.success(`Approx. remaining useful life of the battery is ${result.batteryData.rul} hours`);
+        } else {
+            const errorMessage = result?.message || response.statusText || 'Failed to Predict Values';
+            throw new Error(`Error: ${errorMessage}`);
+        }
+    } catch (error) {
+        toast.dismiss();
+        toast.error(
+            error.response?.data?.message ||
+            error.message ||
+            "Something went wrong. Please try again."
+        );
+    } finally {
+        setSubmitting(false);
+    }
+};

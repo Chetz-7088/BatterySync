@@ -1,23 +1,23 @@
 import React, { useEffect, useState, useRef } from "react";
 
 const Plans = () => {
-    const [isVisible, setIsVisible ] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
     const planRef = useRef(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if(entry.isIntersecting){
+                if (entry.isIntersecting) {
                     setIsVisible(true);
                 }
             },
             { threshold: 0.3 }
         );
-        if(planRef.current){
+        if (planRef.current) {
             observer.observe(planRef.current);
         }
         return () => {
-            if(planRef.current){
+            if (planRef.current) {
                 observer.unobserve(planRef.current);
             }
         };

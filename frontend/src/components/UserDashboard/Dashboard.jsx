@@ -3,28 +3,32 @@ import PageTransitionWrapper from '../../PageTransitionWrapper'
 import Navbar from '../Navbar/Navbar'
 import { isLoggedIn } from '../../lib/server_actions/utils';
 import { useNavigate } from 'react-router-dom';
+import BatteryForm from './BatteryForm';
+import './Dashboard.css';
 
 const Dashboard = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const isUserLoggedIn = isLoggedIn();
-    setLoggedIn(isUserLoggedIn);
 
-    if (!loggedIn) {
-      // navigate('/login');
-    }
-  }, []);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const navigate = useNavigate();
 
-  return (
-    <PageTransitionWrapper>
-      <div className="">
-        {/* Header */}
-        <Navbar />
+    useEffect(() => {
+        const checkLogin = isLoggedIn();
+        console.log("isLoggedIn? ", checkLogin);
+        if (!checkLogin) {
+            navigate('/login');
+        } else {
+            setLoggedIn(true);
+        }
+    }, [navigate]);
 
-      </div>
-    </PageTransitionWrapper>
-  )
+    return (
+        <PageTransitionWrapper>
+            <div className="">
+                <Navbar />
+                <BatteryForm />
+            </div>
+        </PageTransitionWrapper>
+    )
 }
 
-export default Dashboard
+export default Dashboard;

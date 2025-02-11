@@ -10,26 +10,26 @@ import Home from "./components/Home/Home";
 import Dashboard from "./components/UserDashboard/Dashboard";
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        {/* Home Page */}
-        <Route path="/" element={<Home />} />
+    return (
+        <Router>
+            <Routes>
+                {/* Home Page */}
+                <Route path="/" element={<Home />} />
 
-        {/* Authentication Pages */}
-        <Route path="/login" element={<AuthPage isSignup={false} />} />
-        <Route path="/signup" element={<AuthPage isSignup={true} />} />
-        <Route path="/forgetPass" element={<ForgetPass />} />
-        <Route path="/verifyotp" element={<VerifyOtp />} />
-        <Route path="/updatePass" element={<UpdatePass />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+                {/* Authentication Pages */}
+                <Route path="/login" element={<AuthPage isSignup={false} />} />
+                <Route path="/signup" element={<AuthPage isSignup={true} />} />
+                <Route path="/forgetPass" element={<ForgetPass />} />
+                <Route path="/verifyotp" element={<VerifyOtp />} />
+                <Route path="/updatePass" element={<UpdatePass />} />
+                <Route path="/dashboard" element={<Dashboard />} />
 
-        {/* Error Handler */}
-        <Route path="*" element={<h1>Error 404: Page Not Found</h1>} />
-      </Routes>
-      <ToastContainer />
-    </Router>
-  );
+                {/* Error Handler */}
+                <Route path="*" element={<h1>Error 404: Page Not Found</h1>} />
+            </Routes>
+            <ToastContainer />
+        </Router>
+    );
 }
 
 export default App;

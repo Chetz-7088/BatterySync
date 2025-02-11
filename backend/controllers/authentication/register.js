@@ -1,10 +1,10 @@
-const User = require('../models/Users');
+const User = require('../../models/Users');
 const bcrypt = require('bcrypt')
 const joi = require("joi"); // For details validations
 
 const register = async (req, res, next) => {
     console.log("Welcome to user data submission");
-    
+
     try {
         const { firstName, lastName, username, email, batteryType, address, city, state, country, phone, password } = req.body;
         const en_password = await bcrypt.hash(password, 10);
