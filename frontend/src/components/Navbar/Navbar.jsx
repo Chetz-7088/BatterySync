@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../assets/BatterySync.png";
 import "./Navbar.css";
 import { isLoggedIn } from "../../lib/server_actions/utils";
@@ -7,7 +7,6 @@ import { isLoggedIn } from "../../lib/server_actions/utils";
 const Navbar = () => {
     const [activeItem, setActiveItem] = useState("home");
     const [loggedIn, setLoggedIn] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const isUserLoggedIn = isLoggedIn();
@@ -30,7 +29,7 @@ const Navbar = () => {
             <div className="logo-container flex justify-start items-center mb-1.5">
                 <Link className="logo flex items-center text-white" to="/">
                     <img src={logo} alt="Company Logo" className="w-24 h-24 mr-4" />
-                    <h1 className="text-4xl font-semibold">BatterySync</h1>
+                    <h1><strong>Battery</strong><span className="lugrasimo-regular">Sync</span></ h1>
                 </Link>
             </div>
             <nav className="navigation">

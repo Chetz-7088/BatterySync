@@ -25,7 +25,7 @@ const Plans = () => {
 
     return (
         <section className={`pricing ${isVisible ? "visible" : ""}`} ref={planRef}>
-            <h2>Pricing Plans</h2>
+            <h2>PRICING PLANS</h2>
             <div className="pricing-tiers">
                 <div className="plan free">
                     <h3>Free</h3>
