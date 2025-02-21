@@ -8,6 +8,7 @@ import VerifyOtp from "./components/Authentication/Verify_Otp";
 import UpdatePass from "./components/Authentication/UpdatePass";
 import Home from "./components/Home/Home";
 import Dashboard from "./components/UserDashboard/Dashboard";
+import Payment from "./components/Payment/Payment";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/verifyotp" element={<VerifyOtp />} />
         <Route path="/updatePass" element={<UpdatePass />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/plans" element={<Payment />} />
 
         {/* Error Handler */}
         <Route path="*" element={<h1>Error 404: Page Not Found</h1>} />
