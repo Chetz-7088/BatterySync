@@ -43,7 +43,7 @@ const Plans = () => {
                         <li>📢 Real-time Predictive Alerts</li>
                         <li>📞 24/7 Priority Support</li>
                     </ul>
-                    <button onClick={() => window.location.href = "/subscribe"}>Subscribe</button>
+                    <button onClick={() => window.location.href = "/plans"}>Subscribe</button>
                 </div>
             </div>
         </section>
