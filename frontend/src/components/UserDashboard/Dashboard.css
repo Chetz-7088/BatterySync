@@ -1,3 +1,18 @@
+/* Dashboard */
+
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+/* Battery form */
+
 .error-message {
     margin-bottom: 10px;
     position: relative;
@@ -20,4 +35,77 @@ input[type="number"]::-webkit-inner-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+/* Graphs */
+
+.graphs {
+    border: 1px solid #ffffff44;
+    backdrop-filter: blur(2px);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin: 1px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Rul Graph */
+
+.rul-graph-container {
+    text-align: center;
+    margin: 20px;
+    color: white;
+    width: 50vw;
+}
+
+.graph-container {
+    width: 38rem;
+    height: 400px;
+    margin: 0;
+}
+
+.BatteryChart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.BatteryChart h3 {
+    margin: 5px;
+}
+
+.BatteryChart div {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.battery-condition-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #FF6347;
+    margin-top: 15px;
+}
+
+.BatteryChart .button {
+    padding: 10px 20px;
+    margin-top: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.BatteryChart .button:hover {
+    background-color: #45a049;
 }

@@ -382,11 +382,11 @@ export const PredictRulSubmitHandler = async (values, { setSubmitting }, setRUL)
         const result = await response.json();
 
         if (response.ok) {
-            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("user", JSON.stringify(result.user));
             setRUL(result.batteryData.rul);
 
             toast.dismiss();
-            toast.success(`Approx. remaining useful life of the battery is ${result.batteryData.rul} hours`);
+            toast.success(`Approx. remaining useful life of the battery is ${result.batteryData.rul} cycles`);
         } else {
             const errorMessage = result?.message || response.statusText || 'Failed to Predict Values';
             throw new Error(`Error: ${errorMessage}`);

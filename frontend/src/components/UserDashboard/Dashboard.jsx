@@ -5,6 +5,8 @@ import { isLoggedIn } from '../../lib/server_actions/utils';
 import { useNavigate } from 'react-router-dom';
 import BatteryForm from './BatteryForm';
 import './Dashboard.css';
+import RulGraph from './RulGraph';
+import BatteryCondition from './BatteryCondition';
 
 const Dashboard = () => {
 
@@ -23,8 +25,10 @@ const Dashboard = () => {
 
     return (
         <PageTransitionWrapper>
-            <div className="">
-                <Navbar />
+            <Navbar />
+            <div className='dashboard'>
+                <BatteryCondition />
+                <RulGraph />
                 <BatteryForm />
             </div>
         </PageTransitionWrapper>

@@ -27,12 +27,14 @@ const Navbar = () => {
 
     return (
         <header className="navbar">
-            <div className="logo-container flex justify-start items-center mb-1.5">
-                <Link className="logo flex items-center text-white" to="/">
-                    <img src={logo} alt="Company Logo" className="w-24 h-24 mr-4" />
-                    <h1 className="text-4xl font-semibold">BatterySync</h1>
-                </Link>
-            </div>
+           <div className="logo-container flex justify-start items-center mb-1.5">
+                          <Link className="logo flex items-center text-white" to="/">
+                              <img src={logo} alt="Company Logo" className="w-56 h-56 mr-4" />
+                              <p style={{ fontSize: "24px" }}>
+                                  <strong>Battery</strong><span className="lugrasimo-regular">Sync</span>
+                              </p>
+                          </Link>
+                      </div>
             <nav className="navigation">
                 <ul>
                     <li
@@ -67,7 +69,7 @@ const Navbar = () => {
                         onClick={() => handleNavClick("tripplanner")}
                     >
                         <Link to="/trip-planner">
-                            <span className="icon"><ion-icon name="map" /></span>
+                            <span className="icon"><ion-icon name="location" /></span>
                             <span className="text">Trip Planner</span>
                         </Link>
                     </li>

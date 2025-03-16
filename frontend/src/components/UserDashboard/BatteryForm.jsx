@@ -2,22 +2,21 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { predictRul_initialValues, predictRulValidationSchema } from '../../lib/server_actions/utils';
 import { PredictRulSubmitHandler } from '../../lib/client_actions/user.actions';
-import { toast } from 'react-toastify';  // Import toast for notifications
 
 const PredictRulForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [RUL, setRUL] = useState(null);  // To store the predicted RUL value
+    const [RUL, setRUL] = useState(null);
 
     return (
         <div className="right-box">
             <div className="glass-form">
-                <h2>Know the Remaining Useful Life of you Battery Now...</h2>
+                <h2>Know the Remaining Useful Life of your Battery Now...</h2>
                 <Formik
                     initialValues={predictRul_initialValues}
                     validationSchema={predictRulValidationSchema}
                     onSubmit={async (values, actions) => {
                         setIsSubmitting(true);
-                        await PredictRulSubmitHandler(values, actions, setRUL);  // Pass setRUL here
+                        await PredictRulSubmitHandler(values, actions, setRUL);
                         setIsSubmitting(false);
                     }}
                 >
@@ -97,7 +96,7 @@ const PredictRulForm = () => {
                                 <button
                                     type="submit"
                                     className="submit-button"
-                                    disabled={isSubmitting}  // Disable button while submitting
+                                    disabled={isSubmitting}
                                 >
                                     {isSubmitting ? "Predicting..." : "Submit"}
                                 </button>
@@ -109,7 +108,7 @@ const PredictRulForm = () => {
                 {RUL !== null && (
                     <div className="rul-box">
                         <h3>Approx. remaining useful life of the battery is: </h3>
-                        <p>{RUL}</p>
+                        <p>{RUL} cycles</p>
                     </div>
                 )}
             </div>

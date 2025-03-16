@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 import { jwtDecode } from 'jwt-decode';
+import { toast } from "react-toastify";
 
 // Sign Up page
 export const signup_initialValues = {
@@ -91,10 +92,10 @@ export const updatePass_validationSchema = Yup.object({
 
 export const isLoggedIn = () => {
     const token = localStorage.getItem('token');
-    console.log("Token: ", token);
     if (!token)
         return false;
 
+    console.log("Token: ", token);
     try {
         const decodedToken = jwtDecode(token);
         const currentTime = Math.floor(Date.now() / 1000);
@@ -143,3 +144,181 @@ export const predictRulValidationSchema = Yup.object().shape({
         .required('Charging Time is required')
         .min(0, 'Charging Time must be a positive number'),
 });
+
+// RULGraph.js functions
+
+// Function to fetch and process data from localStorage
+
+export const fetchRULDataFromLocalStorage = () => {
+    try {
+        const userData = localStorage.getItem('user');
+        if (userData) {
+            const parsedUserData = JSON.parse(userData);
+            if (parsedUserData.batteryData && Array.isArray(parsedUserData.batteryData)) {
+                const sortedData = parsedUserData.batteryData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                return sortedData;
+            }
+        }
+        return [];
+    } catch (e) {
+        toast.dismiss();
+        toast.error('Error fetching user data from localStorage', e);
+        console.error('Error parsing user data from localStorage:', e);
+        return [];
+    }
+};
+
+export const prepareChartData = (batteryData) => {
+    try {
+        const labels = batteryData.map((dataPoint) => {
+            let date = new Date(dataPoint.timestamp);
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        });
+
+        const rulValues = batteryData.map((dataPoint) => dataPoint.rul);
+        const datasetLabel = 'Remaining Useful Life';
+
+        return {
+            labels,
+            datasets: [
+                {
+                    label: datasetLabel,
+                    data: rulValues,
+                    borderColor: 'gold',
+                    pointBackgroundColor: 'gold',
+                    fill: true,
+                    tension: 0.1,
+                },
+            ],
+        };
+    } catch (e) {
+        toast.dismiss();
+        toast.error('Error preparing chart data');
+        console.error('Error preparing chart data:', e);
+        return { labels: [], datasets: [] };
+    }
+};
+
+
+export const chartOptions = {
+    responsive: true,
+    scales: {
+        x: {
+            ticks: {
+                color: 'white',
+            },
+            grid: {
+                display: false,
+            },
+            border: {
+                color: 'white',
+                width: 1,
+            },
+            title: {
+                display: true,
+                text: 'Time Stamp',
+                color: 'white',
+                position: 'top',
+            },
+        },
+        y: {
+            ticks: {
+                color: 'white',
+            },
+            grid: {
+                display: false,
+            },
+            border: {
+                color: 'white',
+                width: 1,
+            },
+            title: {
+                display: true,
+                text: 'Remaining Useful Life (cycles)',
+                color: 'white',
+                position: 'top',
+            },
+        },
+    },
+    elements: {
+        line: {
+            borderWidth: 2,
+        },
+    },
+    plugins: {
+        legend: {
+            position: 'top',
+            align: 'end',
+            labels: {
+                color: 'white',
+            },
+        },
+        tooltip: {
+            callbacks: {
+                label: (context) => {
+                    const label = context.dataset.label || '';
+                    const value = context.raw;
+                    let condition = 'Good';
+                    if (value >= 393 && value <= 715) {
+                        condition = 'Moderate';
+                    } else if (value < 393) {
+                        condition = 'Bad';
+                    }
+                    return `${label}: ${value} (${condition})`;
+                },
+            },
+        },
+        zoom: {
+            pan: {
+                enabled: true,
+                mode: 'xy',
+            },
+            zoom: {
+                enabled: true,
+                mode: 'xy',
+            },
+        },
+        annotation: {
+            annotations: [
+                {
+                    type: 'box',
+                    yMin: 800,
+                    yMax: 1000,
+                    backgroundColor: 'rgba(0,255,0,0.2)',
+                    borderWidth: 0,
+                },
+                {
+                    type: 'box',
+                    yMin: 300,
+                    yMax: 800,
+                    backgroundColor: 'rgba(0,0,255,0.2)',
+                    borderWidth: 0,
+                },
+                {
+                    type: 'box',
+                    yMin: 0,
+                    yMax: 300,
+                    backgroundColor: 'rgba(255,0,0,0.2)',
+                    borderWidth: 0,
+                }
+            ],
+        },
+    },
+};
+
+export const getBatteryColor = (rul) => {
+    if (rul > 800) return 'green';
+    if (rul > 300) return 'blue';
+    if (rul >= 100) return 'orange';
+    return 'red';
+};
+
+export const getBatteryConditionText = (rul) => {
+    if (rul > 800) return 'Battery is in good condition.';
+    if (rul > 300) return 'Battery is in fair condition.';
+    if (rul >= 100) return 'Battery is in poor condition. Consider maintenance.';
+    return 'Battery is in critical condition. Replace immediately.';
+};
