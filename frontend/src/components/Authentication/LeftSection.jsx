@@ -30,7 +30,6 @@ const LeftSection = ({ isSignup }) => {
                 </p>
             </div>
             <div className="ev-features text-white mb-1.5">
-                {/* <h3 className="text-xl">Manage your EV battery health with exciting features like:</h3> */}
                 <ul className="features list-none mt-1 space-y-0.75">
                     <li className="flex flex-col items-center">
                         <FaBatteryHalf className="react-icon" color="#9aff9d" />
