@@ -8,26 +8,26 @@ import Plans from './Plans';
 import './home.css';
 
 const Home = () => {
-  return (
-    <PageTransitionWrapper>
-      <div className="home">
-        {/* Header */}
-        <Navbar />
-        
-        {/* Hero Section */}
-        <Hero />
+    return (
+        <PageTransitionWrapper>
+            <div className="home">
+                {/* Header */}
+                <Navbar />
 
-        {/* Features Section */}
-        <Features />
+                {/* Hero Section */}
+                <Hero />
 
-        {/* How It Works Section */}
-        <Working />
+                {/* Features Section */}
+                <Features />
 
-        {/* Pricing Section */}
-        <Plans />
-      </div>
-    </PageTransitionWrapper>
-  );
+                {/* How It Works Section */}
+                <Working />
+
+                {/* Pricing Section */}
+                <Plans />
+            </div>
+        </PageTransitionWrapper>
+    );
 };
 
 export default Home;

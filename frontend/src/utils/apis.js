@@ -7,6 +7,7 @@ const apis = () => {
         forgetPass: `${local}/user/forgetPass`,
         verifyOtp: `${local}/user/verifyOtp`,
         updatePass: `${local}/user/updatePass`,
+        lithiumIon: `${local}/user/lithiumIon`,
     }
     return list;
 }

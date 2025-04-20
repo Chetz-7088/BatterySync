@@ -2,23 +2,23 @@ import React, { useEffect, useState, useRef } from "react";
 import { FaBatteryHalf, FaMapMarkedAlt, FaTools } from 'react-icons/fa';
 
 const Features = () => {
-    const [isVisible, setIsVisible ] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
     const featuresRef = useRef(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if(entry.isIntersecting){
+                if (entry.isIntersecting) {
                     setIsVisible(true);
                 }
             },
             { threshold: 0.3 }
         );
-        if(featuresRef.current){
+        if (featuresRef.current) {
             observer.observe(featuresRef.current);
         }
         return () => {
-            if(featuresRef.current){
+            if (featuresRef.current) {
                 observer.unobserve(featuresRef.current);
             }
         };

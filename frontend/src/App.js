@@ -11,11 +11,11 @@ import Dashboard from "./components/UserDashboard/Dashboard";
 import Payment from "./components/Payment/Payment";
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        {/* Home Page */}
-        <Route path="/" element={<Home />} />
+    return (
+        <Router>
+            <Routes>
+                {/* Home Page */}
+                <Route path="/" element={<Home />} />
 
         {/* Authentication Pages */}
         <Route path="/login" element={<AuthPage isSignup={false} />} />
@@ -26,12 +26,12 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/plans" element={<Payment />} />
 
-        {/* Error Handler */}
-        <Route path="*" element={<h1>Error 404: Page Not Found</h1>} />
-      </Routes>
-      <ToastContainer />
-    </Router>
-  );
+                {/* Error Handler */}
+                <Route path="*" element={<h1>Error 404: Page Not Found</h1>} />
+            </Routes>
+            <ToastContainer />
+        </Router>
+    );
 }
 
 export default App;

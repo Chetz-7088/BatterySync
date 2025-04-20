@@ -1,4 +1,4 @@
-const User = require('../models/Users');
+const User = require('../../models/Users');
 const bcrypt = require('bcrypt')
 const joi = require("joi");
 const jwt = require("jsonwebtoken")
@@ -47,6 +47,8 @@ const login = async (req, res, next) => {
             process.env.ACCESS_KEY_TOKEN, {
             expiresIn: '7d'
         });
+
+        user.otp = {};
 
         res.status(201).json({
             message: "Logged In successfully",
