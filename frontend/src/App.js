@@ -9,6 +9,7 @@ import UpdatePass from "./components/Authentication/UpdatePass";
 import Home from "./components/Home/Home";
 import Dashboard from "./components/UserDashboard/Dashboard";
 import Payment from "./components/Payment/Payment";
+import Logout from "./components/Authentication/Logout";
 
 function App() {
     return (
@@ -17,14 +18,15 @@ function App() {
                 {/* Home Page */}
                 <Route path="/" element={<Home />} />
 
-        {/* Authentication Pages */}
-        <Route path="/login" element={<AuthPage isSignup={false} />} />
-        <Route path="/signup" element={<AuthPage isSignup={true} />} />
-        <Route path="/forgetPass" element={<ForgetPass />} />
-        <Route path="/verifyotp" element={<VerifyOtp />} />
-        <Route path="/updatePass" element={<UpdatePass />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/plans" element={<Payment />} />
+                {/* Authentication Pages */}
+                <Route path="/login" element={<AuthPage isSignup={false} />} />
+                <Route path="/signup" element={<AuthPage isSignup={true} />} />
+                <Route path="/forgetPass" element={<ForgetPass />} />
+                <Route path="/verifyotp" element={<VerifyOtp />} />
+                <Route path="/updatePass" element={<UpdatePass />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/plans" element={<Payment />} />
+                <Route path="/logout" element={<Logout />} />
 
                 {/* Error Handler */}
                 <Route path="*" element={<h1>Error 404: Page Not Found</h1>} />

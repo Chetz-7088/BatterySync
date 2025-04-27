@@ -115,6 +115,15 @@ const Navbar = () => {
                                     <span className="text">Profile</span>
                                 </Link>
                             </li>
+                            <li
+                                className={`list ${activeItem === "logout" ? "active" : ""}`}
+                                onClick={() => handleNavClick("logout")}
+                            >
+                                <Link to="/logout">
+                                    <span className="icon"><ion-icon name="log-out" /></span>
+                                    <span className="text">Logout</span>
+                                </Link>
+                            </li>
                         </>
                     )}
                 </ul>
